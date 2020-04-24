@@ -119,7 +119,7 @@ class Blockchain {
             if (message.split(':').length === 3) {
                 let timestamp = parseInt(message.split(':')[1])
                 let currentTime = parseInt(new Date().getTime().toString().slice(0, -3));
-                if (currentTime - timestamp <= 30) {
+                if (currentTime - timestamp <= 4) {
                     let isValid = bitcoinMessage.verify(message, address, signature);
                     if (isValid) {
                         const block = await self._addBlock(new BlockClass.Block({
@@ -205,22 +205,32 @@ class Blockchain {
         let self = this;
         let errorLog = [];
         return new Promise(async (resolve, reject) => {
-            let prevBlockHash = null
-            for (const block of self.chain) {
-                const isValid = await block.validate();
-                if (!isValid || block.previousBlockHash !== prevBlockHash) {
-                    errorLog.push({
-                        block,
-                        error: "Unable to validate block"
-                    })
+            if (self.height > 0) {
+                for (var i = 1; i <= self.height; i++) {
+                    let block = self.chain[i];
+                    let validation = await block.validate();
+                    if (!validation){
+                        console.log("ERROR VALIDATING DATA");
+                    } else if (block.previousBlockHash != self.chain[i-1].hash) {
+                        console.log("ERROR WITH PREVIOUS BLOCK HASH");
+                    }
                 }
-                prevBlockHash = block.prevBlockHash;
+                if (errorLog) {
+                    resolve(errorLog);
+                } else {
+                    resolve("Chain is valid.");
+                }
+            } else {
+                reject(Error("Cannot validate chain.")).catch(error => {
+                    console.log('caught', error.message);
+                });
             }
-            resolve(errorLog)
+        }).then(successfulValidation => {
+            console.log(successfulValidation);
+        }).catch(unsuccessfulValidation => {
+            console.log(unsuccessfulValidation);
         });
-
     }
-
 }
 
 module.exports.Blockchain = Blockchain;   
