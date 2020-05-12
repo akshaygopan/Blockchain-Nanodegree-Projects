@@ -18,4 +18,4 @@ Name : SuperStarToken
 
 Symbol : SST
 
-Rinkeby Network Address: 
+Rinkeby Network Address: 0x675ed1d59985c47bab0c107d81e22ef4ae266d2118a633515f0faf52591adf1d
