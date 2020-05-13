@@ -14,6 +14,9 @@ This repository containts an Ethereum DApp that demonstrates a Supply Chain flow
 
 [Truffle Framework](https://www.trufflesuite.com/) - Truffle is the most popular development framework for Ethereum with a mission to make your life a whole lot easier.
 
+Contract address
+https://rinkeby.etherscan.io/tx/0x1deab3d5f6a2727ed7144980fe8aaa5005c3a2accd48a06f60a11aefb3b6c7e6
+
 *Steps to interact with contract*
 
 npm i
