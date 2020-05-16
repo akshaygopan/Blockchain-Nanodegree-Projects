@@ -59,6 +59,7 @@ View the contracts on etherscan
 
 * **OpenSea Market Place -** https://rinkeby.opensea.io/assets/unidentified-contract-v373
 
+![](images/Screenshot(251).png)
 
 
 # Project Resources
